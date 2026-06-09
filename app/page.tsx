@@ -172,14 +172,25 @@ export default function HomePage() {
         @media(max-width:900px){
           .about{grid-template-columns:1fr;gap:3rem;padding:70px 1.4rem}
           .testi-grid{grid-template-columns:1fr}.tc-big,.tc-wide,.tc-sm{grid-column:span 1;grid-row:auto}
-          .svc-radial{grid-template-columns:1fr}
-          .svc-diagram{min-height:500px;padding:50px 1.4rem}
-          .svc-detail{padding:60px 1.4rem}
+          .svc-radial{grid-template-columns:1fr;min-height:unset}
+          .svc-diagram{order:-1;min-height:400px;padding:40px 1.4rem 28px}
+          .svc-detail{order:0;padding:36px 1.4rem 52px;border-right:none;border-top:1px solid rgba(17,26,27,.06)}
+          .svc-detail::before{display:none}
+          .svc-svg{max-width:440px}
+          .svc-img-wrap{height:160px}
+          .svc-quote{font-size:clamp(17px,4.5vw,24px)}
+          .svc-diagram-label{display:none}
           .feat-grid{grid-template-columns:1fr}.fc,.fc-2,.fc-3,.fc-4,.fc-6{grid-column:span 1}
           .fc-split{grid-template-columns:1fr;gap:2rem}.blog-grid{grid-template-columns:1fr}
           .cta-final{padding:80px 1.4rem}.testi{padding:70px 1.4rem}.features{padding:70px 1.4rem}
           .blog-section{padding:70px 1.4rem}.media-section{padding:60px 1.4rem}.media-top{flex-direction:column;gap:1.5rem}
-        }
+
+        @media(max-width:600px){
+          .svc-diagram{min-height:340px;padding:28px 1rem 20px}
+          .svc-detail{padding:28px 1rem 44px}
+          .svc-svg{max-width:320px}
+          .svc-img-wrap{height:140px}
+        }        }
       `}</style>
       <Nav isHome />
 
