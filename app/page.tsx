@@ -15,7 +15,7 @@ const SERVICOS = [
   { name: 'Filantropia Estratégica', quote: 'Generosidade transformada em <em>impacto real e mensurável</em>', body: 'Ajudamos sua família a estruturar uma agenda filantrópica alinhada aos seus valores, com governança rigorosa, transparência total e resultados concretos no mundo.', wa: 'Filantropia%20Estrat%C3%A9gica', img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80&auto=format' },
 ]
 
-const R = 165, CX = 260, CY = 240
+const R = 182, CX = 300, CY = 260
 const NODES = SERVICOS.map((_, i) => {
   const a = (i * 60 - 90) * Math.PI / 180
   return { x: CX + R * Math.cos(a), y: CY + R * Math.sin(a) }
@@ -163,7 +163,7 @@ export default function HomePage() {
           .about{grid-template-columns:1fr;gap:3rem;padding:70px 1.4rem}
           .testi-grid{grid-template-columns:1fr}.tc-big,.tc-wide,.tc-sm{grid-column:span 1;grid-row:auto}
           .svc-radial{grid-template-columns:1fr}
-          .svc-diagram{min-height:460px;padding:50px 1.4rem}
+          .svc-diagram{min-height:500px;padding:50px 1.4rem}
           .svc-detail{padding:60px 1.4rem}
           .feat-grid{grid-template-columns:1fr}.fc,.fc-2,.fc-3,.fc-4,.fc-6{grid-column:span 1}
           .fc-split{grid-template-columns:1fr;gap:2rem}.blog-grid{grid-template-columns:1fr}
@@ -228,67 +228,161 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SERVIÇOS RADIAL ── */}
+      {/* ── SERVIÇOS RADIAL PREMIUM ── */}
       <section className="svc-section" id="servicos">
         <div className="svc-radial">
 
-          {/* LEFT: Explicação do serviço */}
-          <div className="svc-detail rv">
-            <div className="svc-detail-tag">
-              Serviço {String(activeSvc + 1).padStart(2, '0')} — {s.name}
+          {/* LEFT: Detalhe do serviço */}
+          <div className="svc-detail">
+            <div className="svc-detail-inner" key={activeSvc}>
+              <div className="svc-tag">
+                <span className="svc-tag-num">{String(activeSvc+1).padStart(2,'0')}</span>
+                <span>{s.name}</span>
+              </div>
+              <div className="svc-img-wrap">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.img} alt={s.name} loading="lazy"/>
+                <div className="svc-img-overlay"/>
+              </div>
+              <h2 className="svc-quote" dangerouslySetInnerHTML={{ __html: s.quote }}/>
+              <p className="svc-body-text">{s.body}</p>
+              <a href={`${WA_BASE}?text=Olá!%20Gostaria%20de%20falar%20sobre%20${s.wa}%20com%20a%20Calix%20Family%20Office.`}
+                target="_blank" rel="noopener noreferrer" className="svc-wa-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L0 24l6.293-1.508A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.93 0-3.733-.53-5.272-1.45l-.378-.225-3.736.895.944-3.633-.247-.39A9.794 9.794 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+                Falar sobre {s.name}
+              </a>
             </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img key={s.img} src={s.img} alt={s.name} className="svc-detail-img" loading="lazy" />
-            <h2 className="svc-quote" dangerouslySetInnerHTML={{ __html: s.quote }} />
-            <p className="svc-body-text">{s.body}</p>
-            <a href={`${WA_BASE}?text=Olá!%20Gostaria%20de%20falar%20sobre%20${s.wa}%20com%20a%20Calix%20Family%20Office.`}
-              target="_blank" rel="noopener noreferrer" className="svc-wa-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L0 24l6.293-1.508A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-1.93 0-3.733-.53-5.272-1.45l-.378-.225-3.736.895.944-3.633-.247-.39A9.794 9.794 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
-              Falar sobre {s.name}
-            </a>
           </div>
 
-          {/* RIGHT: Diagrama radial */}
-          <div className="svc-diagram rv d1">
+          {/* RIGHT: Diagrama radial premium */}
+          <div className="svc-diagram">
             <div className="svc-diagram-label">Seis Serviços Integrados</div>
-            <svg viewBox="0 0 520 480" className="svc-svg" aria-label="Diagrama de serviços">
-              {/* Linhas centro → nós */}
-              {NODES.map((p, i) => (
-                <line key={i} x1={CX} y1={CY} x2={p.x} y2={p.y}
-                  stroke={activeSvc===i ? 'rgba(181,202,170,.55)' : 'rgba(219,214,193,.1)'}
-                  strokeWidth={activeSvc===i ? 1.8 : 1}
-                  style={{transition:'stroke .4s,stroke-width .4s'}}
-                />
-              ))}
-              {/* Círculo central */}
-              <circle cx={CX} cy={CY} r={55} fill="rgba(219,214,193,.05)" stroke="rgba(219,214,193,.2)" strokeWidth="1"/>
-              <circle cx={CX} cy={CY} r={62} fill="none" stroke="rgba(181,202,170,.07)" strokeWidth="9"/>
-              {/* Ícone família */}
-              <g transform="translate(229,207)" stroke="rgba(219,214,193,.65)" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="31" cy="14" r="8"/><path d="M15 50c0-10 7-16 16-16s16 6 16 16"/>
-                <circle cx="11" cy="17" r="6"/><path d="M0 48c0-8 5-13 11-13 3 0 5.5 1 7 3"/>
-                <circle cx="51" cy="17" r="6"/><path d="M62 48c0-8-5-13-11-13-3 0-5.5 1-7 3"/>
+            <svg viewBox="0 0 600 520" className="svc-svg" aria-label="Diagrama de serviços">
+              <defs>
+                <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#1f3435" stopOpacity="0.9"/>
+                  <stop offset="100%" stopColor="#0c1617" stopOpacity="0"/>
+                </radialGradient>
+                <filter id="nodeGlw" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feColorMatrix in="blur" type="matrix"
+                    values="0 0 0 0 0.71  0 0 0 0 0.79  0 0 0 0 0.67  0 0 0 0.65 0"
+                    result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+                <filter id="lineGlw" x="-10%" y="-300%" width="120%" height="700%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Background glow */}
+              <circle cx="300" cy="260" r="300" fill="url(#bgGlow)"/>
+
+              {/* Orbit rings */}
+              <circle cx="300" cy="260" r="238" fill="none" stroke="rgba(219,214,193,.03)" strokeWidth="1" strokeDasharray="3 10"/>
+              <circle cx="300" cy="260" r="176" fill="none" stroke="rgba(219,214,193,.04)" strokeWidth="1"/>
+              <circle cx="300" cy="260" r="112" fill="none" stroke="rgba(219,214,193,.05)" strokeWidth="1"/>
+
+              {/* Connection lines + dots */}
+              {NODES.map((p, i) => {
+                const angle = (i * 60 - 90) * Math.PI / 180
+                const sx = 300 + 65 * Math.cos(angle)
+                const sy = 260 + 65 * Math.sin(angle)
+                const ex = 300 + (R - 88) * Math.cos(angle)
+                const ey = 260 + (R - 88) * Math.sin(angle)
+                const on = activeSvc === i
+                return (
+                  <g key={i}>
+                    {on && <line x1={sx} y1={sy} x2={ex} y2={ey}
+                      stroke="rgba(181,202,170,.3)" strokeWidth="7"
+                      strokeLinecap="round" filter="url(#lineGlw)"/>}
+                    <line x1={sx} y1={sy} x2={ex} y2={ey}
+                      stroke={on ? '#b5caaa' : 'rgba(219,214,193,.1)'}
+                      strokeWidth={on ? 2 : 1}
+                      strokeLinecap="round"
+                      strokeDasharray={on ? 'none' : '3 6'}
+                      style={{transition:'stroke .4s,stroke-width .4s'}}/>
+                    <circle cx={sx} cy={sy} r="3"
+                      fill={on ? '#b5caaa' : 'rgba(219,214,193,.2)'}
+                      style={{transition:'fill .4s'}}/>
+                  </g>
+                )
+              })}
+
+              {/* Center — pulse rings */}
+              <circle cx="300" cy="260" r="72" fill="none" stroke="rgba(181,202,170,.12)" strokeWidth="1" className="center-p2"/>
+              <circle cx="300" cy="260" r="64" fill="none" stroke="rgba(181,202,170,.18)" strokeWidth="1" className="center-p1"/>
+              <circle cx="300" cy="260" r="58" fill="rgba(219,214,193,.05)" stroke="rgba(219,214,193,.2)" strokeWidth="1"/>
+              <circle cx="300" cy="260" r="48" fill="rgba(219,214,193,.05)"/>
+
+              {/* Family icon */}
+              <g transform="translate(268,228)" stroke="rgba(219,214,193,.72)" fill="none" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="32" cy="13" r="8.5"/>
+                <path d="M14 50c0-10 7.5-16 18-16s18 6 18 16"/>
+                <circle cx="11" cy="16" r="6"/>
+                <path d="M0 48c0-8 5-13 11-13 2.5 0 5 1 7 2.5"/>
+                <circle cx="53" cy="16" r="6"/>
+                <path d="M64 48c0-8-5-13-11-13-2.5 0-5 1-7 2.5"/>
               </g>
-              {/* Nós */}
+
+              {/* Service nodes — bigger pill buttons */}
               {SERVICOS.map((svc, i) => {
                 const p = NODES[i]
-                const on = activeSvc===i
-                const [l1,l2] = split2(svc.name)
+                const on = activeSvc === i
+                const [l1, l2] = split2(svc.name)
+                // Bigger nodes
+                const nw = 174, nh = 56, rx2 = 28
+                const nx = p.x - nw / 2, ny = p.y - nh / 2
                 return (
-                  <g key={i} className="svc-node" onClick={()=>setActiveSvc(i)}
+                  <g key={i} className="svc-node"
+                    onClick={() => setActiveSvc(i)}
                     tabIndex={0} role="button" aria-label={svc.name}
-                    onKeyDown={e=>e.key==='Enter'&&setActiveSvc(i)}>
-                    <ellipse cx={p.x} cy={p.y} rx={65} ry={22}
-                      fill={on?'rgba(181,202,170,.15)':'rgba(17,26,27,.4)'}
-                      stroke={on?'#b5caaa':'rgba(219,214,193,.2)'}
-                      strokeWidth={on?1.5:1}/>
-                    {l2?(
+                    onKeyDown={e => e.key === 'Enter' && setActiveSvc(i)}>
+
+                    {/* Outer glow halo (active) */}
+                    {on && <rect x={nx-12} y={ny-12} width={nw+24} height={nh+24} rx={rx2+12}
+                      fill="none" stroke="#b5caaa" strokeWidth="16" opacity=".1"/>}
+
+                    {/* Node body */}
+                    <rect x={nx} y={ny} width={nw} height={nh} rx={rx2}
+                      fill={on ? 'rgba(181,202,170,.16)' : 'rgba(11,22,23,.6)'}
+                      stroke={on ? '#b5caaa' : 'rgba(219,214,193,.16)'}
+                      strokeWidth={on ? 1.5 : 1}
+                      filter={on ? 'url(#nodeGlw)' : ''}/>
+
+                    {/* Number badge */}
+                    <rect x={nx+11} y={ny+(nh-26)/2} width={26} height={26} rx={13}
+                      fill={on ? 'rgba(181,202,170,.28)' : 'rgba(219,214,193,.07)'}
+                      stroke={on ? 'rgba(181,202,170,.6)' : 'rgba(219,214,193,.13)'}
+                      strokeWidth="1"/>
+                    <text x={nx+24} y={p.y+0.5}
+                      textAnchor="middle" dominantBaseline="middle"
+                      fill={on ? '#b5caaa' : 'rgba(219,214,193,.45)'}
+                      fontSize="9" fontFamily="DM Mono,monospace" fontWeight="500">
+                      {String(i+1).padStart(2,'0')}
+                    </text>
+
+                    {/* Service name */}
+                    {l2 ? (
                       <>
-                        <text x={p.x} y={p.y-5} textAnchor="middle" fill={on?'#dbd6c1':'rgba(219,214,193,.5)'} fontSize="8.5" fontFamily="DM Mono,monospace" letterSpacing=".08em">{l1}</text>
-                        <text x={p.x} y={p.y+7} textAnchor="middle" fill={on?'#dbd6c1':'rgba(219,214,193,.5)'} fontSize="8.5" fontFamily="DM Mono,monospace" letterSpacing=".08em">{l2}</text>
+                        <text x={nx+46} y={p.y-6} dominantBaseline="middle"
+                          fill={on ? '#dbd6c1' : 'rgba(219,214,193,.52)'}
+                          fontSize="10" fontFamily="DM Mono,monospace" letterSpacing=".05em">{l1}</text>
+                        <text x={nx+46} y={p.y+7} dominantBaseline="middle"
+                          fill={on ? '#dbd6c1' : 'rgba(219,214,193,.52)'}
+                          fontSize="10" fontFamily="DM Mono,monospace" letterSpacing=".05em">{l2}</text>
                       </>
-                    ):(
-                      <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="middle" fill={on?'#dbd6c1':'rgba(219,214,193,.5)'} fontSize="8.5" fontFamily="DM Mono,monospace" letterSpacing=".08em">{l1}</text>
+                    ) : (
+                      <text x={nx+46} y={p.y} dominantBaseline="middle"
+                        fill={on ? '#dbd6c1' : 'rgba(219,214,193,.52)'}
+                        fontSize="10" fontFamily="DM Mono,monospace" letterSpacing=".05em">{l1}</text>
                     )}
                   </g>
                 )
@@ -298,7 +392,6 @@ export default function HomePage() {
 
         </div>
       </section>
-
       {/* DIFERENCIAIS */}
       <section className="features" id="diferenciais">
         <div className="feat-header rv">
