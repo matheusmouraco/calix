@@ -110,7 +110,7 @@ export default function HomePage() {
         .svc-diagram-label{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(219,214,193,.22);margin-bottom:2rem;align-self:flex-start;display:flex;align-items:center;gap:10px}
         .svc-diagram-label::before{content:'';width:16px;height:1px;background:rgba(219,214,193,.2)}
         .svc-svg{width:100%;max-width:600px;cursor:default;overflow:visible}
-        .svc-node{cursor:pointer}
+        .svc-node{cursor:pointer;outline:none}
         .svc-node rect{transition:fill .3s,stroke .3s,stroke-width .3s}
         .svc-node text{transition:fill .3s;pointer-events:none;user-select:none}
         .svc-node:hover>rect:nth-child(2){stroke:rgba(181,202,170,.45)!important}
